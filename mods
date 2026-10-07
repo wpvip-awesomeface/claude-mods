@@ -5,6 +5,9 @@
   mods on <name|all>   load it in every new session
   mods off <name|all>  stop loading it
 
+"all" means the core mods. Personal mods in fun/ are turned on by name
+(or "fun" for all of them).
+
 Works by editing CLAUDE_CODE_PLUGIN_DIRS in ~/.claude/settings.json.
 Changes apply to sessions started after you run it.
 """
@@ -15,8 +18,19 @@ MODS = os.path.join(HOME, '.claude', 'mods')
 SETTINGS = os.path.join(HOME, '.claude', 'settings.json')
 KEY = 'CLAUDE_CODE_PLUGIN_DIRS'
 
+def scan(folder):
+    return sorted(d for d in os.listdir(folder) if os.path.isfile(os.path.join(folder, d, '.claude-plugin', 'plugin.json')))
+
 def available():
-    return sorted(d for d in os.listdir(MODS) if os.path.isfile(os.path.join(MODS, d, '.claude-plugin', 'plugin.json')))
+    # name -> folder; core mods at the top level, personal ones under fun/
+    found = {n: os.path.join(MODS, n) for n in scan(MODS)}
+    fun = os.path.join(MODS, 'fun')
+    if os.path.isdir(fun):
+        found.update({n: os.path.join(fun, n) for n in scan(fun)})
+    return found
+
+def is_fun(path):
+    return os.path.dirname(path) == os.path.join(MODS, 'fun')
 
 def load():
     with open(SETTINGS) as f:
@@ -40,19 +54,25 @@ def save(settings, dirs):
 
 def main(args):
     settings = load()
-    dirs = enabled(settings)
+    # Drop entries for mods that moved or were deleted.
+    dirs = [d for d in enabled(settings) if os.path.isdir(d) or not d.startswith(MODS + os.sep)]
     names = available()
     if not args:
-        for n in names:
-            print(('on ' if os.path.join(MODS, n) in dirs else 'off') + '  ' + n)
+        for n, path in names.items():
+            print(('on ' if path in dirs else 'off') + '  ' + n + ('  (fun)' if is_fun(path) else ''))
         return
     if len(args) != 2 or args[0] not in ('on', 'off'):
         print(__doc__.strip()); sys.exit(1)
-    targets = names if args[1] == 'all' else [args[1]]
+    if args[1] == 'all':
+        targets = [n for n, path in names.items() if not is_fun(path)]
+    elif args[1] == 'fun':
+        targets = [n for n, path in names.items() if is_fun(path)]
+    else:
+        targets = [args[1]]
     for n in targets:
         if n not in names:
             print(f'no mod named {n}'); sys.exit(1)
-        path = os.path.join(MODS, n)
+        path = names[n]
         if args[0] == 'on' and path not in dirs:
             dirs.append(path)
         if args[0] == 'off' and path in dirs:

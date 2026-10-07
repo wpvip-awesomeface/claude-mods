@@ -36,8 +36,8 @@ Skip if a PreToolUse hook already runs `read_guard.py`.
 
 Ask the user: "Install the bento, turn-timer and recipe-card mods too?"
 If yes, run `~/.claude/mods/install.sh`, then turn off the ones they don't want
-with `~/.claude/mods/mods off <name>`. `workbench` is personal to the author's
-setup, so turn it off unless the user asks for it.
+with `~/.claude/mods/mods off <name>`. The personal mods in `fun/` stay off
+unless the user asks for them.
 
 ## 5. Finish
 

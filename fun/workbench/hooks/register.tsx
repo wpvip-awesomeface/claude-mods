@@ -301,7 +301,7 @@ const show = async ($: Dollar) => {
 
 // The one quote list every session reads: paste lines or a whole paragraph, # for comments.
 // Relative to $HOME, so the mod works on any machine.
-const QUOTES_PATH = '.claude/mods/workbench/assets/quotes.txt'
+const QUOTES_PATH = '.claude/mods/fun/workbench/assets/quotes.txt'
 const QUOTE_COLOR = '#F2F2F0'
 const QUOTE_FONT = "Helvetica, 'Helvetica Neue', Arial, sans-serif"
 

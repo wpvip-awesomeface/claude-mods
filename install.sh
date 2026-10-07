@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Set up these mods on a new machine.
 # Usage: git clone <this repo> ~/.claude/mods && ~/.claude/mods/install.sh
+#        add --all to also turn on the personal mods in fun/
 set -euo pipefail
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
@@ -15,12 +16,13 @@ mkdir -p "$HOME/.local/bin"
 ln -sf "$HERE/mods" "$HOME/.local/bin/mods"
 
 # Start a personal quote list for workbench, if there isn't one.
-Q="$HERE/workbench/assets"
+Q="$HERE/fun/workbench/assets"
 [ -f "$Q/quotes.txt" ] || cp "$Q/quotes.example.txt" "$Q/quotes.txt"
 
 # Load every mod in new sessions, and hot-reload them when files change.
 [ -f "$HOME/.claude/settings.json" ] || echo '{}' > "$HOME/.claude/settings.json"
 "$HERE/mods" on all
+[ "${1:-}" = "--all" ] && "$HERE/mods" on fun
 python3 - <<'PY'
 import json, os
 p = os.path.expanduser('~/.claude/settings.json')

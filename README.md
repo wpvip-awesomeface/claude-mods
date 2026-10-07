@@ -11,9 +11,11 @@ git clone https://github.com/wpvip-awesomeface/claude-mods.git ~/.claude/mods
 ~/.claude/mods/install.sh
 ```
 
-Then start a new Claude Code session. The script:
+Then start a new Claude Code session. Add `--all` to also turn on the personal mods in [`fun/`](fun/) (that's the full backup restore).
 
-- turns every mod on for new sessions (via `CLAUDE_CODE_PLUGIN_DIRS` in `~/.claude/settings.json`)
+The script:
+
+- turns the core mods on for new sessions (via `CLAUDE_CODE_PLUGIN_DIRS` in `~/.claude/settings.json`)
 - turns on hot reload (`CLAUDE_CODE_PLUGIN_DIR_WATCH=1`)
 - links the `mods` command into `~/.local/bin`
 
@@ -23,7 +25,8 @@ Then start a new Claude Code session. The script:
 mods                 # list mods and whether they're on
 mods on bento        # load one in every new session
 mods off workbench   # stop loading it
-mods on all
+mods on all          # the core mods
+mods on fun          # the personal mods in fun/
 ```
 
 ## The mods
@@ -33,7 +36,7 @@ mods on all
 | [bento](bento/) | A band above the prompt showing context use, turns and subagents | Yes, directly |
 | [turn-timer](turn-timer/) | "Speed Radar": how long each reply took | Indirectly |
 | [recipe-card](recipe-card/) | A card under each answer showing the route line, with `/recipe` to save a solve | Yes, over time |
-| [workbench](workbench/) | A side pane with your open PRs and next meeting | No, it's for focus |
+| [workbench](fun/workbench/) (in `fun/`) | A side pane with your open PRs, next meeting, pizza and a dino | No, it's for focus and fun |
 
 ### bento
 
@@ -61,7 +64,10 @@ mods on all
 
 **Needs:** a skills library that uses the route line. Without one, the card has nothing to read.
 
-### workbench
+### workbench (fun)
+
+Personal, so it lives in `fun/` and the installer leaves it off unless you pass `--all` or run `mods on workbench`.
+
 
 **What:** a side pane with:
 
@@ -72,7 +78,7 @@ mods on all
 
 **Why:** keeps PR status and your calendar in view, so you don't spend turns asking Claude to check them.
 
-**Needs:** the `gh` CLI signed in, and a Google Calendar connector for birdy. The demo links and the company email domain are set at the top of [`workbench/hooks/register.tsx`](workbench/hooks/register.tsx), so change those for your own setup. Edit the quote list with `/quotes`.
+**Needs:** the `gh` CLI signed in, and a Google Calendar connector for birdy. The demo links and the company email domain are set at the top of [`fun/workbench/hooks/register.tsx`](fun/workbench/hooks/register.tsx), so change those for your own setup. Edit the quote list with `/quotes`.
 
 **Commands:** `/workbench`, `/greg-check`, `/prep`, `/quotes`, `/fun`.
 

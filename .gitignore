@@ -1,6 +1,6 @@
 # Generated per machine by Claude Code (editor types only)
-*/.claude-plugin/types/
+**/.claude-plugin/types/
 .DS_Store
 
 # Personal quote list (copy quotes.example.txt to start one)
-workbench/assets/quotes.txt
+fun/workbench/assets/quotes.txt
