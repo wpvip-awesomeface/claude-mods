@@ -1,0 +1,6 @@
+{
+  "name": "workbench",
+  "version": "0.1.0",
+  "description": "Workbench side pane: greg watches your PRs (the pass), birdy counts down to your next meeting.",
+  "types": "./types/index.d.ts"
+}

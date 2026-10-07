@@ -1,0 +1,6 @@
+{
+  "name": "bento",
+  "version": "0.1.0",
+  "description": "A lunchbox that fills as context grows, with /doggybag to pack a handoff for a fresh session.",
+  "types": "./types/index.d.ts"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "recipe-card",
+  "version": "0.1.0",
+  "description": "Spots fresh solves worth keeping and offers /recipe to save them to the skills-os library.",
+  "types": "./types/index.d.ts"
+}

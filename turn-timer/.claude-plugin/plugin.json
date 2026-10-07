@@ -1,0 +1,1 @@
+{ "name": "turn-timer", "version": "0.2.0", "description": "Shows how long each reply took, above the SkillOS line", "types": "./types/index.d.ts" }

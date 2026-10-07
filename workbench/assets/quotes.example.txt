@@ -1,0 +1,8 @@
+# One quote per line. Workbench shows one a day, never the same as yesterday.
+# Lines starting with # are skipped. Run /quotes to open and reload.
+# install.sh copies this to quotes.txt (which stays out of git) if you don't have one.
+Ship the ugly first draft.
+Show it, don't explain it.
+Talk less. Ship more.
+Every click costs something.
+The demo is the argument.
