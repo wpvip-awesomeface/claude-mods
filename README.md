@@ -66,7 +66,9 @@ mods on fun          # the personal mods in fun/
 
 ### workbench (fun)
 
-Personal, so it lives in `fun/` and the installer leaves it off unless you pass `--all` or run `mods on workbench`.
+> **Heads up:** this is a personal mod, built around the author's own workflow (their demo sites, calendar and sense of humor). Most people won't need or want it. It's here so the author's full setup is backed up, and as an example if you want to build your own.
+
+It lives in `fun/`, and the installer leaves it off unless you pass `--all` or run `mods on workbench`.
 
 
 **What:** a side pane with:
